@@ -21,7 +21,10 @@ public class ProblemSet3_5 {
 		
 		// test your solutions here
 		
-		ps.primes(1, 1000);
+		//ps.primes(1, 1000);
+		//ps.fibonacci(23);
+		ps.palindromicNumbers(23432);
+		//ps.multiples(2, 3, 40);
 	}
 	
 	/**
@@ -34,9 +37,32 @@ public class ProblemSet3_5 {
 	 * @param start
 	 * @param end
 	 */
+	public boolean isPrime(int n) {
+		if (n == 1) {
+			return false;
+		}
+		for (int a = 2; a < n; a++){
+			if(n % a == 0) {
+				return false;
+			}
+		} 
+		return true;
+	}
 	
 	public void primes(int start, int end) {
-		
+		int count = 0;
+		for(; start < end; start++) {
+			if(isPrime(start)) {
+				count++;
+			}
+		}
+		if(count == 1){
+			System.out.println("There is " + count + " prime number."); 
+		}
+		else{
+			System.out.println("There are " + count + " prime numbers.");
+		}
+
 	}
 	
 	/**
@@ -51,6 +77,7 @@ public class ProblemSet3_5 {
 	
 	public void leapYears(int count) {
 		
+
 	}
 	
 	/**
@@ -63,7 +90,22 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void palindromicNumbers(int number) {
-		
+		double palindrome = 0;
+		double x = 0.0;
+		int digits = 1; 
+		for(int i = 10; number/i > 0; i*=10) {
+			digits+=1;
+		}
+		for(int a = 1; a <= digits; a++) {
+			x = number % (Math.pow(10, a));
+			palindrome = palindrome + (x * Math.pow(10, (a-1)));
+		}
+		if (palindrome == number) {
+			System.out.println(number + " is a palindromic number.");
+		}
+		else {
+			System.out.println(number + " is not a palindromic number.");
+		}
 	}
 	
 	/**
@@ -78,7 +120,33 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void fibonacci(int n) {
-		
+		int a = 1;
+		int b = 1;
+		int c = 1;
+		for(int i = 0; i < n-1; i++) {
+			c = a + b;
+			a = b;
+			b = c;
+		}
+		if (n == 1){
+			System.out.println("The 1st Fibonacci number is 1.");
+		}
+		else if(n < 20 && n > 10){
+			System.out.println("The " + n + "th Fibonacci number is " + c + ".");
+		}
+		else if(n % 10 == 1){
+			System.out.println("The " + n + "st Fibonacci number is " + c + ".");
+		}
+		else if(n % 10 ==2){
+			System.out.println("The " + n + "nd Fibonacci number is " + c + ".");
+		}
+		else if(n % 10 == 3){
+			System.out.println("The " + n + "rd Fibonacci number is " + c + ".");
+		}
+		else {
+			System.out.println("The " + n + "th Fibonacci number is " + c + ".");
+		}
+
 	}
 	
 	/**
@@ -91,6 +159,20 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void multiples(int x, int y, int limit) {
-		
+		int z = 0;
+		int a = x;
+		int b = y;
+		while(x < limit) {
+			z = z + x;
+			x =  x + a;
+		}
+		while(y < limit) {
+			if(y % a != 0) {
+				z = z + y;
+			}
+			y = y + b;
+		}
+		System.out.println("The sum of all multiples of " + a + " and " + b + " less than " + limit + " is " + z + ".");
+
 	}
 }
