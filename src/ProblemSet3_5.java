@@ -21,10 +21,11 @@ public class ProblemSet3_5 {
 		
 		// test your solutions here
 		
-		//ps.primes(1, 1000);
-		//ps.fibonacci(23);
-		ps.palindromicNumbers(23432);
-		//ps.multiples(2, 3, 40);
+		ps.primes(1, 1000);
+		ps.fibonacci(23);
+		ps.leapYears(22);
+		ps.palindromicNumbers(1234321);
+		ps.multiples(2, 3, 40);
 	}
 	
 	/**
@@ -76,7 +77,36 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void leapYears(int count) {
-		
+		int year = 2018;
+		while(year % 4 != 0){
+			year++;
+		}
+		if(year % 400 != 0 && year % 100 == 0){
+			year+=4;
+		}
+		int year2 = year + 4;
+		if(count == 1){
+			System.out.println("The next leap year is " + year + ".");
+			return;
+		}
+		else if(count==2){
+			System.out.println("The next 2 leap years are " + year + " " + year2 + ".");
+			return;	
+		}
+		else{
+			System.out.print("The next " + count + " leap years are ");
+		}
+		for (int i = 0; i <= count; i++){
+			int leapyear = year + (i * 4);
+			if((leapyear % 4 == 0) && (leapyear % 100 != 0) || (leapyear % 400 == 0)){
+				if(count-i != 0){
+					System.out.print(leapyear + ", ");
+				}
+				else{
+					System.out.println("and " + leapyear + ".");
+				}
+			}
+		}
 
 	}
 	
@@ -88,23 +118,19 @@ public class ProblemSet3_5 {
 	 *                                               
 	 * @param number
 	 */
-	
 	public void palindromicNumbers(int number) {
-		double palindrome = 0;
-		double x = 0.0;
-		int digits = 1; 
-		for(int i = 10; number/i > 0; i*=10) {
-			digits+=1;
+		int palindrome = number;
+		int reverse = 0;
+		while (palindrome != 0) {
+			int digit = reverse % 10;
+			reverse = reverse * 10 + digit;
+			palindrome /= 10;
 		}
-		for(int a = 1; a <= digits; a++) {
-			x = number % (Math.pow(10, a));
-			palindrome = palindrome + (x * Math.pow(10, (a-1)));
-		}
-		if (palindrome == number) {
+		if (number == reverse) {
 			System.out.println(number + " is a palindromic number.");
 		}
 		else {
-			System.out.println(number + " is not a palindromic number.");
+			System.out.println(number + " is a palindromic number.");
 		}
 	}
 	
